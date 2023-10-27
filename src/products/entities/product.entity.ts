@@ -1,8 +1,10 @@
+import { ProductImage } from './product-image.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,7 +24,7 @@ export class Product {
   price: number;
 
   @Column({
-    type: 'text', // es lo mismo poner type que solo poner 'text' al principio
+    type: 'text', // es lo mismo poner type: 'text' que solo poner 'text' al principio
     nullable: true,
   })
   description: string;
@@ -50,6 +52,12 @@ export class Product {
     default: [],
   })
   tags: string[];
+
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {
+    cascade: true,
+    eager: true,
+  })
+  images?: ProductImage[];
 
   @BeforeInsert()
   checkSlugInsert() {
