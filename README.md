@@ -21,14 +21,14 @@
   docker-compose up -d
 ```
 
-6. Ejecutar el seed para llenar la base de datos con productos
-
-```
-  http://localhost:3000/api/seed
-```
-
-7. Levantar la aplicación en modo desarrollo
+6. Levantar la aplicación en modo desarrollo
 
 ```
   yarn start:dev
+```
+
+7. Ejecutar el seed para llenar la base de datos con productos
+
+```
+  http://localhost:3000/api/seed
 ```
