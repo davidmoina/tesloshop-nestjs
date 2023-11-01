@@ -15,7 +15,9 @@ import { diskStorage } from 'multer';
 import { fileNamer } from './helpers/fileNamer.helper';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Files')
 @Controller('files')
 export class FilesController {
   constructor(
@@ -23,6 +25,11 @@ export class FilesController {
     private readonly configService: ConfigService,
   ) {}
 
+  @ApiResponse({
+    status: 200,
+    description: 'Get one product image',
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   @Get('product/:imageName')
   findProductImage(
     @Res() res: Response,
@@ -33,6 +40,11 @@ export class FilesController {
     res.sendFile(path);
   }
 
+  @ApiResponse({
+    status: 201,
+    description: 'Upload a file',
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   @Post('product')
   @UseInterceptors(
     FileInterceptor('file', {
